@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="noSkin" format="boolean"/>
+    <attr name="previewSkinName" format="string"/>
+
+    <declare-styleable name="SkinPreview">
+        <attr name="previewSkinName"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinBackground">
+        <attr name="android:background"/>
+        <attr name="android:backgroundTint"/>
+    </declare-styleable>
+
+</resources>

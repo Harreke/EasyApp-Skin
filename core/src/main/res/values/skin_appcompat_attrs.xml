@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SkinCompoundButton">
+        <attr name="android:button"/>
+        <attr name="android:buttonTint"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinCheckedTextView">
+        <attr name="android:checkMark"/>
+        <attr name="android:checkMarkTint"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinTextView">
+        <attr name="android:textColor"/>
+        <attr name="android:textColorHint"/>
+        <attr name="android:drawableLeft"/>
+        <attr name="android:drawableTop"/>
+        <attr name="android:drawableRight"/>
+        <attr name="android:drawableBottom"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinImageView">
+        <attr name="android:src"/>
+        <attr name="android:tint"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinSeekBar">
+        <attr name="android:thumb"/>
+        <attr name="android:thumbTint"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinProgressBar">
+        <attr name="android:progressDrawable"/>
+        <attr name="android:progressBackgroundTint"/>
+        <attr name="android:progressTint"/>
+        <attr name="android:secondaryProgressTint"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinToolbar">
+        <attr name="titleTextColor"/>
+        <attr name="subtitleTextColor"/>
+        <attr name="navigationIcon"/>
+    </declare-styleable>
+
+</resources>
