@@ -11,6 +11,8 @@
     <declare-styleable name="SkinBackground">
         <attr name="android:background"/>
         <attr name="android:backgroundTint"/>
+        <attr name="background"/>
+        <attr name="backgroundTint"/>
     </declare-styleable>
 
 </resources>

@@ -1,6 +1,9 @@
 package com.harreke.easyapp.skin.core
 
+import android.app.Activity
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.SkinAppCompatDelegate
 import androidx.core.content.edit
 import java.util.concurrent.locks.ReentrantReadWriteLock
@@ -14,8 +17,7 @@ object SkinManager {
         get() = SkinResourcesManager.skinName
     private val mSkinObserver = HashSet<ISkinObserver>()
     private val mSkinLocker = ReentrantReadWriteLock()
-
-    private fun Context?.sharedPreference(name: String) = this?.getSharedPreferences(name, Context.MODE_PRIVATE)
+    private val mDelegateMap = HashMap<Activity, SkinAppCompatDelegate>()
 
     fun loadSkin(context: Context?): SkinManager {
         if (context == null) return this
@@ -72,5 +74,23 @@ object SkinManager {
     fun addStainerWrapper(wrapper: ISkinStainerWrapper): SkinManager {
         SkinAppCompatDelegate.skinViewStainerWrappers.add(wrapper)
         return this
+    }
+
+    fun createDelegate(activity: AppCompatActivity): AppCompatDelegate? {
+        if (activity::class.java.getAnnotation(NoSkin::class.java) != null) return null
+        var delegate = mDelegateMap[activity]
+        if (delegate == null) {
+            delegate = SkinAppCompatDelegate(activity)
+            mDelegateMap[activity] = delegate
+        }
+        return delegate
+    }
+
+    fun destroyDelegate(activity: AppCompatActivity) {
+        mDelegateMap.remove(activity)?.destroy()
+    }
+
+    fun updateDelegate(activity: AppCompatActivity) {
+        mDelegateMap[activity]?.updateSkin()
     }
 }

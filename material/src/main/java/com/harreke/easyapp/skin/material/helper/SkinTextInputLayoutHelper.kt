@@ -13,6 +13,7 @@ class SkinTextInputLayoutHelper(private val view: TextInputLayout, attrs: Attrib
     private var mErrorIconDrawableId = 0
     private var mErrorIconTintId = 0
     private var mCounterTextColorId = 0
+    private var mCounterOverflowTextColorId = 0
     private var mPlaceholderTextColorId = 0
     private var mPrefixTextColorId = 0
     private var mSuffixTextColorId = 0
@@ -34,6 +35,7 @@ class SkinTextInputLayoutHelper(private val view: TextInputLayout, attrs: Attrib
         mErrorIconDrawableId = style.getResourceId(R.styleable.SkinTextInputLayout_errorIconDrawable, 0)
         mErrorIconTintId = style.getResourceId(R.styleable.SkinTextInputLayout_errorIconTint, 0)
         mCounterTextColorId = style.getResourceId(R.styleable.SkinTextInputLayout_counterTextColor, 0)
+        mCounterOverflowTextColorId = style.getResourceId(R.styleable.SkinTextInputLayout_counterOverflowTextColor, 0)
         mPlaceholderTextColorId = style.getResourceId(R.styleable.SkinTextInputLayout_placeholderTextColor, 0)
         mPrefixTextColorId = style.getResourceId(R.styleable.SkinTextInputLayout_prefixTextColor, 0)
         mSuffixTextColorId = style.getResourceId(R.styleable.SkinTextInputLayout_suffixTextColor, 0)
@@ -77,6 +79,11 @@ class SkinTextInputLayoutHelper(private val view: TextInputLayout, attrs: Attrib
     fun seCounterTextColorResource(counterTextColorId: Int) {
         mCounterTextColorId = counterTextColorId
         updateCounterTextColor()
+    }
+
+    fun seCounterOverflowTextColorResource(counterOverflowTextColorId: Int) {
+        mCounterOverflowTextColorId = counterOverflowTextColorId
+        updateCounterOverflowTextColor()
     }
 
     fun setPlaceholderTextColorResource(placeholderTextColorId: Int) {
@@ -169,6 +176,11 @@ class SkinTextInputLayoutHelper(private val view: TextInputLayout, attrs: Attrib
         view.counterTextColor = SkinResourcesManager.getSkinColorStateList(view.context, mCounterTextColorId, previewSkinName)
     }
 
+    private fun updateCounterOverflowTextColor() {
+        if (mCounterOverflowTextColorId == 0) return
+        view.counterOverflowTextColor = SkinResourcesManager.getSkinColorStateList(view.context, mCounterOverflowTextColorId, previewSkinName)
+    }
+
     private fun updatePlaceholderTextColor() {
         if (mPlaceholderTextColorId == 0) return
         view.placeholderTextColor = SkinResourcesManager.getSkinColorStateList(view.context, mPlaceholderTextColorId, previewSkinName)
@@ -234,6 +246,7 @@ class SkinTextInputLayoutHelper(private val view: TextInputLayout, attrs: Attrib
         updateHelperTextTextColor()
         updateErrorTextColor()
         updateCounterTextColor()
+        updateCounterOverflowTextColor()
         updatePlaceholderTextColor()
         updatePrefixTextColor()
         updateSuffixTextColor()

@@ -1,4 +1,4 @@
-package com.harreke.easyapp.skin.material.stainer
+package com.harreke.easyapp.skin.cardview.stainer
 
 import android.util.AttributeSet
 import androidx.cardview.widget.CardView

@@ -1,7 +1,9 @@
 package com.harreke.easyapp.skin.material.helper
 
 import android.util.AttributeSet
+import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.TabView
 import com.harreke.easyapp.skin.core.SkinResourcesManager
 import com.harreke.easyapp.skin.material.R
 
@@ -13,7 +15,8 @@ class SkinTabLayoutHelper(private val view: TabLayout, attrs: AttributeSet?, pri
     private var mTabSelectedTextColorId = 0
     private var mTabIconTintId = 0
     private var mTabRippleColorId = 0
-    private val mBaseBackgroundDrawableField = view::class.java.getDeclaredField("baseBackgroundDrawable").apply {
+    private val mSlidingTabIndicator = view.getChildAt(0) as? ViewGroup
+    private val mBaseBackgroundDrawableField = TabView::class.java.getDeclaredField("baseBackgroundDrawable").apply {
         isAccessible = true
     }
 
@@ -70,9 +73,15 @@ class SkinTabLayoutHelper(private val view: TabLayout, attrs: AttributeSet?, pri
     }
 
     private fun updateTabBackground() {
+        val slidingTabIndicator = mSlidingTabIndicator ?: return
         if (mTabBackgroundId == 0) return
         val tabBackground = SkinResourcesManager.getSkinDrawable(view.context, mTabBackgroundId, previewSkinName)
-        mBaseBackgroundDrawableField.set(view, tabBackground)
+        val tabBackgroundField = mBaseBackgroundDrawableField
+        for (i in 0 until slidingTabIndicator.childCount) {
+            val tabView = slidingTabIndicator.getChildAt(i)
+            tabBackgroundField.set(tabView, tabBackground)
+            tabView.invalidate()
+        }
         view.invalidate()
     }
 

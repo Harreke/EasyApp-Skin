@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/btn1"
+        android:icon="@drawable/vector_arrow_left"
+        android:title="button1"
+        app:showAsAction="always"/>
+    
+    <item
+        android:id="@+id/btn2"
+        android:icon="@drawable/vector_arrow_right"
+        android:title="button2"
+        app:showAsAction="always"/>
+    
+    <item
+        android:id="@+id/btn3"
+        android:icon="@drawable/vector_menu"
+        android:title="button3"
+        app:showAsAction="always">
+        
+        <menu>
+            
+            <item
+                android:id="@+id/btn4"
+                android:icon="@drawable/vector_arrow_left"
+                android:title="button4"
+                app:showAsAction="always"/>
+            
+            <item
+                android:id="@+id/btn5"
+                android:icon="@drawable/vector_arrow_right"
+                android:title="button5"
+                app:showAsAction="always"/>
+        
+        </menu>
+    
+    </item>
+
+</menu>

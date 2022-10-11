@@ -1,6 +1,7 @@
 package com.harreke.easyapp.skin.material.helper
 
 import android.util.AttributeSet
+import androidx.annotation.StyleRes
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.harreke.easyapp.skin.core.SkinResourcesManager
 import com.harreke.easyapp.skin.material.R
@@ -20,14 +21,14 @@ class SkinCollapsingToolbarLayoutHelper(private val view: CollapsingToolbarLayou
         style.recycle()
     }
 
-    fun setExpandedTitleTextColorResource(expandedTitleTextColorId: Int) {
-        mExpandedTitleTextAppearanceId = expandedTitleTextColorId
-        updateExpandedTitleTextAppearance()
+    fun setExpandedTitleTextAppearanceResource(@StyleRes expandedTitleTextAppearanceId: Int) {
+        mExpandedTitleTextAppearanceId = expandedTitleTextAppearanceId
+        updateExpandedTitleTextAppearanceColor()
     }
 
-    fun setCollapsedTitleTextColorResource(collapsedTitleTextColorId: Int) {
-        mCollapsedTitleTextAppearanceId = collapsedTitleTextColorId
-        updateCollapsedTitleTextColor()
+    fun setCollapsedTitleTextAppearanceResource(@StyleRes collapsedTitleTextAppearanceId: Int) {
+        mCollapsedTitleTextAppearanceId = collapsedTitleTextAppearanceId
+        updateCollapsedTitleTextAppearanceColor()
     }
 
     fun setContentScrimResource(contentScrimId: Int) {
@@ -40,12 +41,12 @@ class SkinCollapsingToolbarLayoutHelper(private val view: CollapsingToolbarLayou
         updateStatusBarScrim()
     }
 
-    private fun updateExpandedTitleTextAppearance() {
+    private fun updateExpandedTitleTextAppearanceColor() {
         if (mExpandedTitleTextAppearanceId == 0) return
         view.setExpandedTitleColor(SkinResourcesManager.getSkinTextAppearanceColor(view.context, mExpandedTitleTextAppearanceId, previewSkinName))
     }
 
-    private fun updateCollapsedTitleTextColor() {
+    private fun updateCollapsedTitleTextAppearanceColor() {
         if (mCollapsedTitleTextAppearanceId == 0) return
         view.setCollapsedTitleTextColor(SkinResourcesManager.getSkinTextAppearanceColor(view.context, mCollapsedTitleTextAppearanceId, previewSkinName))
     }
@@ -61,8 +62,8 @@ class SkinCollapsingToolbarLayoutHelper(private val view: CollapsingToolbarLayou
     }
 
     fun update() {
-        updateExpandedTitleTextAppearance()
-        updateCollapsedTitleTextColor()
+        updateExpandedTitleTextAppearanceColor()
+        updateCollapsedTitleTextAppearanceColor()
         updateContentScrim()
     }
 }

@@ -6,6 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.harreke.easyapp.skin.core.R
 import com.harreke.easyapp.skin.core.SkinResourcesManager
+import com.harreke.easyapp.skin.core.getCompatResourceId
 
 class SkinSeekBarHelper(private val view: SeekBar, attrs: AttributeSet?, private val previewSkinName: String?) {
     private var mThumbId = 0
@@ -14,7 +15,7 @@ class SkinSeekBarHelper(private val view: SeekBar, attrs: AttributeSet?, private
     init {
         val style = view.context.obtainStyledAttributes(attrs, R.styleable.SkinSeekBar)
         mThumbId = style.getResourceId(R.styleable.SkinSeekBar_android_thumb, 0)
-        mThumbTintId = style.getResourceId(R.styleable.SkinSeekBar_android_thumbTint, 0)
+        mThumbTintId = style.getCompatResourceId(R.styleable.SkinSeekBar_android_thumbTint, R.styleable.SkinSeekBar_thumbTint, 0)
         style.recycle()
     }
 

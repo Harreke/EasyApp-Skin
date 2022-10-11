@@ -4,6 +4,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import com.harreke.easyapp.skin.core.R
 import com.harreke.easyapp.skin.core.SkinResourcesManager
+import com.harreke.easyapp.skin.core.getCompatResourceId
 
 class SkinImageViewHelper(private val view: ImageView, attrs: AttributeSet?, private val previewSkinName: String?) {
     private var mImageId = 0
@@ -12,7 +13,7 @@ class SkinImageViewHelper(private val view: ImageView, attrs: AttributeSet?, pri
     init {
         val style = view.context.obtainStyledAttributes(attrs, R.styleable.SkinImageView)
         mImageId = style.getResourceId(R.styleable.SkinImageView_android_src, 0)
-        mImageTintId = style.getResourceId(R.styleable.SkinImageView_android_tint, 0)
+        mImageTintId = style.getCompatResourceId(R.styleable.SkinImageView_android_tint, R.styleable.SkinImageView_tint, 0)
         style.recycle()
     }
 

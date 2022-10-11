@@ -15,6 +15,7 @@ import androidx.collection.SimpleArrayMap
 import com.harreke.easyapp.skin.apcompat.stainer.*
 import com.harreke.easyapp.skin.core.ISkinStainerWrapper
 import com.harreke.easyapp.skin.core.ISkinView
+import com.harreke.easyapp.skin.core.NoSkin
 import com.harreke.easyapp.skin.core.stainer.ISkinStainer
 import java.lang.ref.WeakReference
 import java.lang.reflect.Constructor
@@ -23,7 +24,7 @@ import kotlin.concurrent.read
 import kotlin.concurrent.write
 
 @SuppressLint("RestrictedApi")
-internal class SkinAppCompatDelegate(activity: Activity, callback: AppCompatCallback) : AppCompatDelegateImpl(activity, callback) {
+internal class SkinAppCompatDelegate(activity: AppCompatActivity) : AppCompatDelegateImpl(activity, activity) {
     private val mViewRefs = ArrayList<WeakReference<out ISkinView>>()
     private val mViewLocker = ReentrantReadWriteLock()
 
@@ -108,8 +109,6 @@ internal class SkinAppCompatDelegate(activity: Activity, callback: AppCompatCall
         )
         private val sConstructorMap = SimpleArrayMap<String, Constructor<out View?>>()
         private val sConstructorSignature = arrayOf(Context::class.java, AttributeSet::class.java)
-
-        fun create(activity: Activity, callback: AppCompatCallback) = SkinAppCompatDelegate(activity, callback)
 
         private fun createViewFromTag(context: Context, name: String, attrs: AttributeSet): View? {
             var actualName = name

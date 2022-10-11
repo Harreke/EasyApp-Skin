@@ -4,6 +4,7 @@
     <declare-styleable name="SkinCompoundButton">
         <attr name="android:button"/>
         <attr name="android:buttonTint"/>
+        <attr name="buttonTint"/>
     </declare-styleable>
 
     <declare-styleable name="SkinCheckedTextView">
@@ -23,11 +24,13 @@
     <declare-styleable name="SkinImageView">
         <attr name="android:src"/>
         <attr name="android:tint"/>
+        <attr name="tint"/>
     </declare-styleable>
 
     <declare-styleable name="SkinSeekBar">
         <attr name="android:thumb"/>
         <attr name="android:thumbTint"/>
+        <attr name="thumbTint"/>
     </declare-styleable>
 
     <declare-styleable name="SkinProgressBar">
@@ -35,11 +38,16 @@
         <attr name="android:progressBackgroundTint"/>
         <attr name="android:progressTint"/>
         <attr name="android:secondaryProgressTint"/>
+        <attr name="android:indeterminateTint"/>
     </declare-styleable>
 
     <declare-styleable name="SkinToolbar">
+        <attr name="menu"/>
+        <attr name="popupTheme"/>
         <attr name="titleTextColor"/>
         <attr name="subtitleTextColor"/>
+        <attr name="titleTextAppearance"/>
+        <attr name="subtitleTextAppearance"/>
         <attr name="navigationIcon"/>
     </declare-styleable>
 

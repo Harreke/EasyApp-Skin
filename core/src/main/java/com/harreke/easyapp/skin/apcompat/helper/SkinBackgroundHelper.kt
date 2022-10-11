@@ -6,6 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.harreke.easyapp.skin.core.R
 import com.harreke.easyapp.skin.core.SkinResourcesManager
+import com.harreke.easyapp.skin.core.getCompatResourceId
 
 class SkinBackgroundHelper(private val view: View, attrs: AttributeSet?, private val previewSkinName: String?) {
     private var mBackgroundId = 0
@@ -13,8 +14,8 @@ class SkinBackgroundHelper(private val view: View, attrs: AttributeSet?, private
 
     init {
         val style = view.context.obtainStyledAttributes(attrs, R.styleable.SkinBackground)
-        mBackgroundId = style.getResourceId(R.styleable.SkinBackground_android_background, 0)
-        mBackgroundTintId = style.getResourceId(R.styleable.SkinBackground_android_backgroundTint, 0)
+        mBackgroundId = style.getCompatResourceId(R.styleable.SkinBackground_android_background, R.styleable.SkinBackground_background, 0)
+        mBackgroundTintId = style.getCompatResourceId(R.styleable.SkinBackground_android_backgroundTint, R.styleable.SkinBackground_backgroundTint, 0)
         style.recycle()
     }
 

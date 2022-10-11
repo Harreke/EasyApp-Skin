@@ -12,6 +12,7 @@ class SkinProgressBarHelper(private val view: ProgressBar, attrs: AttributeSet?,
     private var mProgressBackgroundTintId = 0
     private var mProgressTintId = 0
     private var mSecondaryProgressTintId = 0
+    private var mIndeterminateTintId = 0
 
     init {
         val style = view.context.obtainStyledAttributes(attrs, R.styleable.SkinProgressBar)
@@ -19,6 +20,7 @@ class SkinProgressBarHelper(private val view: ProgressBar, attrs: AttributeSet?,
         mProgressBackgroundTintId = style.getResourceId(R.styleable.SkinProgressBar_android_progressBackgroundTint, 0)
         mProgressTintId = style.getResourceId(R.styleable.SkinProgressBar_android_progressTint, 0)
         mSecondaryProgressTintId = style.getResourceId(R.styleable.SkinProgressBar_android_secondaryProgressTint, 0)
+        mIndeterminateTintId = style.getResourceId(R.styleable.SkinProgressBar_android_indeterminateTint, 0)
         style.recycle()
     }
 
@@ -27,19 +29,24 @@ class SkinProgressBarHelper(private val view: ProgressBar, attrs: AttributeSet?,
         updateProgressDrawable()
     }
 
-    fun setProgressBackgroundTintResource(progressBackgroundTintId: Int) {
+    fun setProgressBackgroundTintResource(@ColorRes progressBackgroundTintId: Int) {
         mProgressBackgroundTintId = progressBackgroundTintId
         updateProgressBackgroundTint()
     }
 
-    fun setProgressTintResource(@ColorRes progressTint: Int) {
-        mProgressTintId = progressTint
+    fun setProgressTintResource(@ColorRes progressTintId: Int) {
+        mProgressTintId = progressTintId
         updateProgressTint()
     }
 
-    fun setSecondaryProgressTintResource(secondaryProgressTintId: Int) {
+    fun setSecondaryProgressTintResource(@ColorRes secondaryProgressTintId: Int) {
         mSecondaryProgressTintId = secondaryProgressTintId
-        updateSecondaryProgressTintId()
+        updateSecondaryProgressTint()
+    }
+
+    fun setIndeterminateTintResource(@ColorRes indeterminateTintId: Int) {
+        mIndeterminateTintId = indeterminateTintId
+        updateIndeterminateTintId()
     }
 
     private fun updateProgressDrawable() {
@@ -61,15 +68,21 @@ class SkinProgressBarHelper(private val view: ProgressBar, attrs: AttributeSet?,
         view.progressTintList = SkinResourcesManager.getSkinColorStateList(view.context, mProgressTintId, previewSkinName)
     }
 
-    private fun updateSecondaryProgressTintId() {
+    private fun updateSecondaryProgressTint() {
         if (mSecondaryProgressTintId == 0) return
         view.secondaryProgressTintList = SkinResourcesManager.getSkinColorStateList(view.context, mSecondaryProgressTintId, previewSkinName)
+    }
+
+    private fun updateIndeterminateTintId() {
+        if (mIndeterminateTintId == 0) return
+        view.indeterminateTintList = SkinResourcesManager.getSkinColorStateList(view.context, mIndeterminateTintId, previewSkinName)
     }
 
     fun update() {
         updateProgressDrawable()
         updateProgressBackgroundTint()
         updateProgressTint()
-        updateSecondaryProgressTintId()
+        updateSecondaryProgressTint()
+        updateIndeterminateTintId()
     }
 }

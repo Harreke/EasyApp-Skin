@@ -41,37 +41,42 @@ object SkinResourcesManager {
         return resourceName
     }
 
+    fun getSkinResourceName(context: Context, resourceId: Int, skinName: String? = null): String? {
+        if (resourceId == 0) return null
+        val resources = context.resources
+        val resourceName = ensureResourceName(resources, resourceId) ?: return null
+        val actualSkinName = skinName ?: this.skinName
+        return if (actualSkinName.isEmpty()) resourceName else "${resourceName}_$actualSkinName"
+    }
+
+    fun getSkinResourceId(context: Context, resourceId: Int, resourceType: String, skinName: String? = null): Int {
+        val skinResourceName = getSkinResourceName(context, resourceId, skinName) ?: return 0
+        var skinResourceId = context.resources.getIdentifier(skinResourceName, resourceType, null)
+        if (skinResourceId == 0) {
+            skinResourceId = resourceId
+        }
+        return skinResourceId
+    }
+
     fun getSkinTextAppearanceColor(context: Context, @StyleRes styleId: Int, skinName: String? = null): Int {
         if (styleId == 0) return Color.TRANSPARENT
         val style = context.obtainStyledAttributes(styleId, androidx.appcompat.R.styleable.TextAppearance)
         val colorId = style.getResourceId(androidx.appcompat.R.styleable.TextAppearance_android_textColor, 0)
         style.recycle()
-        val resources = context.resources
-        val colorName = ensureResourceName(resources, colorId) ?: return Color.TRANSPARENT
-        val actualSkinName = skinName ?: this.skinName
-        val skinColorName = if (actualSkinName.isEmpty()) colorName else "${colorName}_$actualSkinName"
-        var skinColor = mColorCache[skinColorName]
-        if (skinColor == null) {
-            var skinColorId = resources.getIdentifier(skinColorName, "color", null)
-            if (skinColorId == 0) {
-                skinColorId = colorId
-            }
-            skinColor = try {
-                ResourcesCompat.getColor(resources, skinColorId, context.theme)
-            } catch (e: Resources.NotFoundException) {
-                null
-            }
-            mColorCache[skinColorName] = skinColor
-        }
-        return skinColor ?: Color.TRANSPARENT
+        return getSkinColor(context, colorId, skinName)
+    }
+
+    fun getSkinTextAppearanceColorStateList(context: Context, @StyleRes styleId: Int, skinName: String? = null): ColorStateList? {
+        if (styleId == 0) return null
+        val style = context.obtainStyledAttributes(styleId, androidx.appcompat.R.styleable.TextAppearance)
+        val colorId = style.getResourceId(androidx.appcompat.R.styleable.TextAppearance_android_textColor, 0)
+        style.recycle()
+        return getSkinColorStateList(context, colorId, skinName)
     }
 
     fun getSkinColor(context: Context, @ColorRes colorId: Int, skinName: String? = null): Int {
-        if (colorId == 0) return Color.TRANSPARENT
+        val skinColorName = getSkinResourceName(context, colorId, skinName) ?: return Color.TRANSPARENT
         val resources = context.resources
-        val colorName = ensureResourceName(resources, colorId) ?: return Color.TRANSPARENT
-        val actualSkinName = skinName ?: this.skinName
-        val skinColorName = if (actualSkinName.isEmpty()) colorName else "${colorName}_$actualSkinName"
         var skinColor = mColorCache[skinColorName]
         if (skinColor == null) {
             var skinColorId = resources.getIdentifier(skinColorName, "color", null)
@@ -89,11 +94,8 @@ object SkinResourcesManager {
     }
 
     fun getSkinColorStateList(context: Context, @ColorRes colorId: Int, skinName: String? = null): ColorStateList? {
-        if (colorId == 0) return null
+        val skinColorStateListName = getSkinResourceName(context, colorId, skinName) ?: return null
         val resources = context.resources
-        val colorName = ensureResourceName(resources, colorId) ?: return null
-        val actualSkinName = skinName ?: this.skinName
-        val skinColorStateListName = if (actualSkinName.isEmpty()) colorName else "${colorName}_$actualSkinName"
         var skinColorStateList = mColorStateListCache[skinColorStateListName]
         if (skinColorStateList == null) {
             var skinColorStateListId = resources.getIdentifier(skinColorStateListName, "color", null)
@@ -111,11 +113,8 @@ object SkinResourcesManager {
     }
 
     fun getSkinDrawable(context: Context, @DrawableRes drawableId: Int, skinName: String? = null): Drawable? {
-        if (drawableId == 0) return null
+        val skinDrawableName = getSkinResourceName(context, drawableId, skinName) ?: return null
         val resources = context.resources
-        val drawableName = ensureResourceName(resources, drawableId) ?: return null
-        val actualSkinName = skinName ?: this.skinName
-        val skinDrawableName = if (actualSkinName.isEmpty()) drawableName else "${drawableName}_$actualSkinName"
         var skinDrawable = mDrawableCache[skinDrawableName]
         if (skinDrawable == null) {
             var skinDrawableId = resources.getIdentifier(skinDrawableName, "drawable", null)

@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <declare-styleable name="SkinNavigationView">
+        <attr name="menu"/>
         <attr name="itemIconTint"/>
         <attr name="itemTextColor"/>
+        <attr name="itemTextAppearance"/>
         <attr name="itemBackground"/>
     </declare-styleable>
-
+    
     <declare-styleable name="SkinNavigationBarView">
+        <attr name="menu"/>
         <attr name="backgroundTint"/>
         <attr name="itemBackground"/>
         <attr name="itemIconTint"/>
         <attr name="itemTextColor"/>
     </declare-styleable>
-
+    
     <declare-styleable name="SkinTabLayout">
         <attr name="tabIndicatorColor"/>
         <attr name="tabBackground"/>
@@ -23,19 +26,19 @@
         <attr name="tabIconTint"/>
         <attr name="tabRippleColor"/>
     </declare-styleable>
-
+    
     <declare-styleable name="SkinCollapsingToolbarLayout">
         <attr name="expandedTitleTextAppearance"/>
         <attr name="collapsedTitleTextAppearance"/>
         <attr name="contentScrim"/>
         <attr name="statusBarScrim"/>
     </declare-styleable>
-
+    
     <declare-styleable name="SkinFloatingActionButton">
         <attr name="backgroundTint"/>
         <attr name="rippleColor"/>
     </declare-styleable>
-
+    
     <declare-styleable name="SkinTextInputLayout">
         <attr name="hintTextColor"/>
         <attr name="helperTextTextColor"/>
@@ -43,6 +46,7 @@
         <attr name="errorIconDrawable"/>
         <attr name="errorIconTint"/>
         <attr name="counterTextColor"/>
+        <attr name="counterOverflowTextColor"/>
         <attr name="placeholderTextColor"/>
         <attr name="prefixTextColor"/>
         <attr name="suffixTextColor"/>
